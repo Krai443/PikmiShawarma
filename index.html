@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pikmi - Твоя ідеальна шаурма</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="изображение_2026-03-11_011306787-removebg-preview.png" type="image/png">
+    <style>
+        /* Глобальні стилі та кольори */
+        :root {
+            --bright-pink: #f48fb1;
+            --dark-pink: #ad1457;
+            --light-pink: #fce4ec;
+            --white: #ffffff;
+            --black: #1a1a1a;
+            --text-gray: #555555;
+            --btn-pink: #ff4081;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Основний шрифт для читання */
+            font-family: 'Nunito', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Округлий шрифт Comfortaa для заголовків та кнопок */
+        h1, h2, h3, .btn, nav a, .logo {
+            font-family: 'Comfortaa', display;
+        }
+
+        body {
+            color: var(--black);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        /* Шапка сайту (Навігація) */
+        header {
+            background-color: var(--bright-pink);
+            padding: 0.8rem 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Стилі для круглого логотипу */
+        .logo img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffe082;
+        }
+
+        /* Головний банер (Hero) */
+        .hero-banner {
+            width: 100%;
+            display: block;
+            background-color: var(--light-pink);
+            position: relative;
+        }
+        
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Стилі для кнопки поверх банера */
+        .hero-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            box-shadow: 0 8px 25px rgba(255, 64, 129, 0.7);
+            z-index: 10;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .hero-btn:hover {
+            transform: translateX(-50%) translateY(-5px);
+            background-color: var(--dark-pink);
+        }
+
+        /* Загальні стилі кнопок */
+        .btn {
+            display: inline-block;
+            background-color: var(--btn-pink);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .menu-item .btn {
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+        }
+        
+        .menu-item .btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--dark-pink);
+        }
+
+        /* Про нас */
+        .about {
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about p {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: var(--text-gray);
+        }
+
+        .about-images {
+            display: flex;
+            gap: 20px;
+        }
+
+        .about-images img {
+            width: 50%;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Меню */
+        .menu {
+            background-color: var(--light-pink);
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .menu h2 {
+            font-size: 2.5rem;
+            color: var(--dark-pink);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--bright-pink);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .menu-item-content {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-header h3 {
+            color: var(--dark-pink);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .price {
+            background-color: var(--dark-pink);
+            color: var(--white);
+            padding: 10px 25px;
+            margin: 20px auto;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            font-family: 'Nunito', sans-serif; /* Цифри краще читаються в Nunito */
+        }
+
+        .menu-item p {
+            color: var(--text-gray);
+            font-size: 1.3rem;
+            flex-grow: 1;
+        }
+
+        .menu-item .btn {
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            width: 100%;
+        }
+
+        /* Відгуки */
+        .reviews {
+            padding: 80px 5%;
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .reviews h2 {
+            font-size: 2.5rem;
+            color: var(--dark-pink);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: var(--light-pink);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .review-card::before {
+            content: "“";
+            font-size: 5rem;
+            color: var(--bright-pink);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+        }
+
+        .reviewer-name {
+            font-weight: 800;
+            color: var(--dark-pink);
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        /* Контакти */
+        .contact {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 5%;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            color: var(--bright-pink);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Адаптивність для телефонів */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem 5%;
+            }
+            .hero-btn {
+                bottom: 20px;
+                font-size: 1.1rem;
+                padding: 10px 25px;
+            }
+            .about {
+                grid-template-columns: 1fr;
+            }
+            .about-images {
+                flex-direction: column;
+            }
+            .about-images img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.jpg" alt="Pikmi Логотип">
+        </div>
+        <nav>
+            <a href="#about">Про нас</a>
+            <a href="#menu">Меню</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#contact">Контакти</a>
+        </nav>
+    </header>
+
+    <section class="hero-banner">
+        <img src="header.jpg" alt="Pikmi - Твоя ідеальна шаурма">
+        <a href="#contact" class="btn hero-btn">Зробити замовлення</a>
+    </section>
+
+    <section class="about" id="about">
+        <div>
+            <h2>Про Pikmi</h2>
+            <p>Pikmi — це більше, ніж просто шаурма. Ми використовуємо тільки найсвіжіші та високоякісні інгредієнти, щоб створити страву, якою ми пишаємося.</p>
+            <p>Наша команда прагне надати вам неперевершений смаковий досвід, поєднуючи традиційні рецепти з сучасними інтерпретаціями. Фірмовий рожевий лаваш — це наша візитна картка, яка підкорить ваше серце (і ваш Instagram).</p>
+        </div>
+        <div class="about-images">
+            <img src="unnamed (3).jpg" alt="Інтер'єр Pikmi">
+            <img src="unnamed (4).jpg" alt="Приготування шаурми">
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <h2>Наше Меню</h2>
+        <div class="menu-grid">
+            
+            <div class="menu-item">
+                <img src="Без імен4і.png" alt="Pikmi Класика">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pikmi Класика 🩷</h3>
+                        
+                    </div>
+                    <p>Ніжне куряче філе, свіжі овочі, хрустка капуста та наш фірмовий рожевий соус у теплому лаваші.</p>
+                    <span class="price">120 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="unnamed (1).jpg" alt="Сирна Насолода">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Сирна Насолода 🧀</h3>
+                    </div>
+                    <p>Подвійна порція сиру чеддер, моцарела, курка та сирний соус. Справжня насолода для сироманів.</p>
+                    <span class="price">140 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Без іме3ні.png" alt="Гостра Штучка">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Гостра Штучка 🌶️</h3>
+                    </div>
+                    <p>Для тих, хто любить гаряче! Курка, халапеньйо, кукурудза, овочі та пікантний гострий соус.</p>
+                    <span class="price">135 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+             <div class="menu-item">
+                <img src="Без імені3.png" alt="Креветкова Мрія">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Креветкова Мрія 🍤</h3>
+                        
+                    </div>
+                    <p>Хрусткі креветки в темпурі, свіже авокадо, шматочки соковитого манго, мікс салату та пікантний рожевий світ-чилі соус.</p>
+                    <span class="price">180 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Без імені.png" alt="Веджі Хіт">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Веджі Хіт 🥑</h3>
+                    </div>
+                    <p>Смажений сир халумі з апетитною скоринкою, шпинат, в'ялені томати, свіжий огірок, ніжний хумус та фірмовий рожевий соус.</p>
+                    <span class="price">150 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="Без імені1.png" alt="Тропічний Бум">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Тропічний Бум 🍍</h3>
+                    </div>
+                    <p>Соковите куряче філе, карамелізовані кільця ананаса на грилі, хрусткий бекон, плавлений сир та рожевий BBQ-соус.</p>
+                    <span class="price">145 грн</span>
+                    <a href="#contact" class="btn">Замовити</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+        <h2>Відгуки клієнтів</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Найкраща шаурма в місті! Рожевий лаваш — це просто вау, дуже інстаграмно. А смак ще кращий за вигляд. М'ясо дуже ніжне."</p>
+                <p class="reviewer-name">Аліна М.</p>
+            </div>
+            
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Сирна насолода виправдовує свою назву на всі 100%. Соуси неймовірні, сиру дійсно багато. Однозначно рекомендую всім друзям!"</p>
+                <p class="reviewer-name">Максим В.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐</div>
+                <p class="review-text">"Дуже класне місце. Гостра шаурма дійсно гостра, як я люблю, з халапеньйо переборщили в міру. Персонал привітний."</p>
+                <p class="reviewer-name">Олена К.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Чекаємо на тебе!</h2>
+        <p>📍 м. Київ, вул. Різницька, 3</p>
+        <p>🕒 Працюємо щодня з 10:00 до 22:00</p>
+        <p>📞 +38 (099) 123-45-67</p>
+    </section>
+
+    <footer style="background-color: var(--black); color: #888; text-align: center; padding: 20px; font-family: 'Nunito', sans-serif;">
+        <p>© 2026 Pikmi. Всі права захищені.</p>
+    </footer>
+
+</body>
+</html>
